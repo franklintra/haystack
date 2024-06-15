@@ -1,0 +1,38 @@
+/home/ryang/cs202/cs202-24-fuzz-corpus/working/dedup-crashes/crash-044b18ac9bafa2ba99f42e118fb319a330c448a0
+
+(process:3411092): GLib-CRITICAL **: 21:16:45.357: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(process:3411092): GLib-CRITICAL **: 21:16:45.359: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+
+(process:3411092): GLib-CRITICAL **: 21:16:45.359: g_hash_table_insert_internal: assertion 'hash_table != NULL' failed
+
+(process:3411092): GLib-CRITICAL **: 21:16:45.359: g_hash_table_lookup: assertion 'hash_table != NULL' failed
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==3411092==ERROR: AddressSanitizer: SEGV on unknown address 0x000000000018 (pc 0x7f20881778d4 bp 0x621000053170 sp 0x7fffea8c9f00 T0)
+==3411092==The signal is caused by a READ memory access.
+==3411092==Hint: address points to the zero page.
+    #0 0x7f20881778d4  (/lib/x86_64-linux-gnu/libvips.so.42+0x1988d4) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #1 0x7f2088178668 in vips_cache_operation_add (/lib/x86_64-linux-gnu/libvips.so.42+0x199668) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #2 0x7f208817870f in vips_cache_operation_buildp (/lib/x86_64-linux-gnu/libvips.so.42+0x19970f) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #3 0x7f208817d4cc in vips_call_required_optional (/lib/x86_64-linux-gnu/libvips.so.42+0x19e4cc) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #4 0x7f208817db86  (/lib/x86_64-linux-gnu/libvips.so.42+0x19eb86) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #5 0x7f208817dfef in vips_call_split (/lib/x86_64-linux-gnu/libvips.so.42+0x19efef) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #6 0x7f208811943d in vips_jpegload_buffer (/lib/x86_64-linux-gnu/libvips.so.42+0x13a43d) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571)
+    #7 0x556f3ec7f9c2 in lazily_resize /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/image_content.c:73:9
+    #8 0x556f3ec98790 in do_read /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfs_read.c:61:19
+    #9 0x556f3ec8ae6f in do_read_cmd /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd_functions.c:362:13
+    #10 0x556f3ec858e4 in fuzz_main /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd.c:57:27
+    #11 0x556f3ec74c9a in LLVMFuzzerTestOneInput /home/ryang/cs202/cs202-24-fuzz-corpus/src/fuzz-target.c:106:13
+    #12 0x556f3eb95593 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x62593) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #13 0x556f3eb7f30f in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x4c30f) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #14 0x556f3eb85066 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x52066) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #15 0x556f3ebaee82 in main (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x7be82) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #16 0x7f2087642d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #17 0x7f2087642e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #18 0x556f3eb79bd4 in _start (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x46bd4) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+
+DEDUP_TOKEN: vips_cache_operation_add--vips_cache_operation_buildp--vips_call_required_optional----vips_call_split--vips_jpegload_buffer--lazily_resize--do_read--do_read_cmd--fuzz_main--LLVMFuzzerTestOneInput--fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)--fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long)--fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))--main--__libc_start_call_main--__libc_start_main--_start
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV (/lib/x86_64-linux-gnu/libvips.so.42+0x1988d4) (BuildId: f5741343347316e84700705d0cbe5ddc7babf571) 
+==3411092==ABORTING

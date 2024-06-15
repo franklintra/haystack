@@ -1,0 +1,23 @@
+/home/ryang/cs202/cs202-24-fuzz-corpus/working/dedup-crashes/a86360e0859f1034dd27915fd82da3ab6c7e35e0
+AddressSanitizer:DEADLYSIGNAL
+=================================================================
+==3411132==ERROR: AddressSanitizer: SEGV on unknown address 0x61e800004a68 (pc 0x7f1644fd9049 bp 0x7fffd081c510 sp 0x7fffd081bcd8 T0)
+==3411132==The signal is caused by a WRITE memory access.
+    #0 0x7f1644fd9049  string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:283
+    #1 0x55f7be7ba273 in __asan_memset (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xfe273) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #2 0x55f7be81aa46 in do_insert /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfs_insert.c:59:5
+    #3 0x55f7be815350 in do_insert_cmd /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd_functions.c:406:13
+    #4 0x55f7be80e8e4 in fuzz_main /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd.c:57:27
+    #5 0x55f7be7fdc9a in LLVMFuzzerTestOneInput /home/ryang/cs202/cs202-24-fuzz-corpus/src/fuzz-target.c:106:13
+    #6 0x55f7be71e593 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x62593) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #7 0x55f7be70830f in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x4c30f) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #8 0x55f7be70e066 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x52066) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #9 0x55f7be737e82 in main (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x7be82) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+    #10 0x7f1644f3dd8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #11 0x7f1644f3de3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #12 0x55f7be702bd4 in _start (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x46bd4) (BuildId: d591d41c0dd051731b6a790e337ba088809a42e3)
+
+DEDUP_TOKEN: __asan_memset--do_insert--do_insert_cmd--fuzz_main--LLVMFuzzerTestOneInput--fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)--fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long)--fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))--main--__libc_start_call_main--__libc_start_main--_start
+AddressSanitizer can not provide additional info.
+SUMMARY: AddressSanitizer: SEGV string/../sysdeps/x86_64/multiarch/memset-vec-unaligned-erms.S:283 
+==3411132==ABORTING

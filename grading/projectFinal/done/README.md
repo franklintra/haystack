@@ -1,0 +1,4 @@
+We did everything that was asked of us in the instruction set on the project. The server is completed, multi-threaded and works completely !
+
+
+As both of us are running arm machines, we couldn’t run the project initially on our own computers. We tried using docker to emulate x86 and run it in a container but struggled with a known issue in the leak sanitizer running over docker and x86 rosetta emulation. Therefore, to avoid using the EPFL VMs which were quite slow, we rented a VPS in the cloud that was running linux and created a sync script to sync all the files from the project to that server. We used ngrok to access the web server at the end for debugging ! For future instance of this project, it might be a good idea to point students towards this solution as it is quite time and workflow efficient.

@@ -1,0 +1,36 @@
+/home/ryang/cs202/cs202-24-fuzz-corpus/working/dedup-crashes/crash-ad59d98467f7fdff73ea8681aa75355ae38bd5b1
+==2274650==WARNING: AddressSanitizer failed to allocate 0xcdca2b0 bytes
+=================================================================
+==2274650==ERROR: AddressSanitizer: attempting double-free on 0x615000004180 in thread T0:
+    #0 0x561b0d6e0812 in __interceptor_free (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xef812) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #1 0x7f0546cdad26 in _IO_deallocate_file libio/./libio/libioP.h:862:3
+    #2 0x7f0546cdad26 in fclose libio/./libio/iofclose.c:74:3
+    #3 0x561b0d6b27ff in fclose (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xc17ff) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #4 0x561b0d739f11 in do_close /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfs_tools.c:115:9
+    #5 0x561b0d72fd36 in do_create_cmd /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd_functions.c:135:5
+    #6 0x561b0d72ba54 in fuzz_main /home/ryang/cs202/cs202-24-fuzz-corpus/projects/cs202-24-prj-paris-franklin/./done/imgfscmd.c:55:27
+    #7 0x561b0d723b4a in LLVMFuzzerTestOneInput /home/ryang/cs202/cs202-24-fuzz-corpus/src/fuzz-target.c:106:13
+    #8 0x561b0d644443 in fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x53443) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #9 0x561b0d62e1bf in fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x3d1bf) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #10 0x561b0d633f16 in fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long)) (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x42f16) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #11 0x561b0d65dd32 in main (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x6cd32) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #12 0x7f0546c85d8f in __libc_start_call_main csu/../sysdeps/nptl/libc_start_call_main.h:58:16
+    #13 0x7f0546c85e3f in __libc_start_main csu/../csu/libc-start.c:392:3
+    #14 0x561b0d628a84 in _start (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0x37a84) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+
+DEDUP_TOKEN: __interceptor_free--_IO_deallocate_file--fclose--fclose--do_close--do_create_cmd--fuzz_main--LLVMFuzzerTestOneInput--fuzzer::Fuzzer::ExecuteCallback(unsigned char const*, unsigned long)--fuzzer::RunOneTest(fuzzer::Fuzzer*, char const*, unsigned long)--fuzzer::FuzzerDriver(int*, char***, int (*)(unsigned char const*, unsigned long))--main--__libc_start_call_main--__libc_start_main--_start
+0x615000004180 is located 0 bytes inside of 472-byte region [0x615000004180,0x615000004358)
+freed by thread T0 here:
+    #0 0x561b0d6e0812 in __interceptor_free (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xef812) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #1 0x7f0546cdad26 in _IO_deallocate_file libio/./libio/libioP.h:862:3
+    #2 0x7f0546cdad26 in fclose libio/./libio/iofclose.c:74:3
+
+DEDUP_TOKEN: __interceptor_free--_IO_deallocate_file--fclose
+previously allocated by thread T0 here:
+    #0 0x561b0d6e0abe in malloc (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xefabe) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357)
+    #1 0x7f0546cdb64d in __fopen_internal libio/./libio/iofopen.c:65:37
+    #2 0x7f0546cdb64d in fopen64 libio/./libio/iofopen.c:86:10
+
+DEDUP_TOKEN: malloc--__fopen_internal--fopen64
+SUMMARY: AddressSanitizer: double-free (/home/ryang/cs202/cs202-24-fuzz-corpus/working/build/cs202-24-prj-paris-franklin/fuzz-target+0xef812) (BuildId: bc1dd7acb68d6fb1091dd70726264dfd48f14357) in __interceptor_free
+==2274650==ABORTING
